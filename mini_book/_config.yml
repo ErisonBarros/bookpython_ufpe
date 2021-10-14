@@ -4,7 +4,7 @@ logo: 'qe-logo-large.png'
 
 # Short description about the book
 description: >-
-  A brief introduction to Python programming for scientific applications.
+  Uma breve introdução à programação Python para aplicações científicas.
 
 execute:
   execute_notebooks           : cache
