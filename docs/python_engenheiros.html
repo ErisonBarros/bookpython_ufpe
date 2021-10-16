@@ -1,0 +1,401 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Python para Estatísticos &#8212; Python para Engenheiros Cartografos e Agrimensores</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting up Your Python Environment" href="getting_started.html" />
+    <link rel="prev" title="About Python" href="about_py.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo_labat_3.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Python para Engenheiros Cartografos e Agrimensores</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="about_py.html">
+   About Python
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Python para Estatísticos
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="getting_started.html">
+   Setting up Your Python Environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="python_by_example.html">
+   An Introductory Example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="learn_more.html">
+   Learn More
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="principais_ide.html">
+   Principais IDEs para desenvolvimento Python
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/docs/python_engenheiros.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/ErisonBarros/bookpython_ufpe/master?urlpath=tree/mini_book/docs/python_engenheiros.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Python para Estatísticos
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#por-que-estudar-python">
+   Por que estudar Python?
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="python-para-estatisticos">
+<h1>Python para Estatísticos<a class="headerlink" href="#python-para-estatisticos" title="Permalink to this headline">¶</a></h1>
+<p>Este material foi escrito com o objetivo de introduzir aos futuros engenheiros os conceitos fundamentais da linguagem Python, bem como apresentá-los às ferramentas que mais lhe podem ser úteis, incluindo bibliotecas de computação matemática, visualização de dados, manipulação de bases e bancos de dados, ferramentas de aprendizagem de máquina, computação paralela, computação em GPU, inferência Bayesiana e criação e consumo de API’s Web. Python é uma linguagem de programação interpretada, de alto nível e de propósito geral. Seu criador, Guido van Rossum, enfatizou legibilidade de código e sua abordagem de orientação a objetos permite que projetos de diversos tamanhos sejam desenvolvidos usando código simples, lógico e fácil de entender, devido a sua sintaxe clara. Além da orientação a objetos, Python também oferece suporte a outros paradigmas de programação, como programação estruturada e programação funcional.</p>
+<p>A filosofia central da linguagem foi resumida no documento The Zen of Python (PEP 20) {cite}petersZen2004, que inclui frases como:</p>
+<p>Belo é melhor do que feio. Explícito é melhor do que implícito. Simples é melhor do que complexo. Complexo é melhor do que complicado. Legibilidade conta. Se a implementação é difícil de explicar, é uma má ideia. Se a implementação é fácil de explicar, deve ser uma boa ideia. Python é visualmente mais “limpa” do que outras linguagens, além de ser mais intuitiva, pois frequentemente usa palavras da língua inglesa onde outras linguagens usariam pontuações. O nome da linguagem é um tributo ao grupo de comédia britânico Monty Python, o que inspirou os desenvolvedores a fazer com que a linguagem seja divertida de usar. Essa abordagem de desenvolvimento inspirou a criação do neologismo “pythonico”, que quer dizer que o código é natural e está de acordo com a filosofia minimalita e de ênfase na legibilidade. Por outro lado, códigos difíceis de entender or ler são chamados de não-pythonicos. Usuários e admiradores de Python, sobretudo aqueles considerados mais experientes costumam er chamados de Pythonistas.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="por-que-estudar-python">
+<h1>Por que estudar Python?<a class="headerlink" href="#por-que-estudar-python" title="Permalink to this headline">¶</a></h1>
+<p>Em 2017, o Stack Overflow, website de perguntas e respostas destinado a desenvolvedores, publicou um estudo sobre o rápido crescimento no interesse pela linguagem Python {cite}robinsonBlog2017. O estudo considerou apenas o interesse de usuários de países de alta renda e naturalmente avaliou apenas resultados até a sua publicação. A {numref}python-growth, obtida por meio da ferramenta Stack Overflow Trends, apresenta as curvas para as mesmas linguagens, considerando usuários de todo o mundo (o que muda as curvas em relação ao estudo citado) e resultados até o meio de 2019. Até o meio de 2012, Python era a sexta linguagem menos buscada das 7 analisadas, tornando-se a linguagem de maior interesse apenas 6 anos depois, no meio de 2018.</p>
+<p><img alt="" src="https://github.com/tmfilho/pyestbook/raw/c53bb64992b805325fd0f982d5aa5f4ff96d7dd9/content/images/python-growth.svg" /></p>
+<p>Crescimento da porcentagem de perguntas de várias linguagens de programação no Stack Overflow. :::</p>
+<p>Esse crescimento do interesse por Python extremamente acentuado a partir de 2012 está conectado ao avanço da área de ciência de dados e conhecimentos relacionados, como aprendizagem de máquina, big data, business analytics, entre outras. Python e R costumam ser as linguagens mais citadas por cientistas de dados em seus perfis em redes sociais como LinkedIn. Segundo análise da Initiative for Analytics and Data Science Standards (IADSS) {cite}fayyadSkill2019, 100% dos cientistas de dados mencionam conhecimento de Python em seus perfis, enquanto 84% mencionam R. Além disso, como mostra a {numref}job-listings, o mercado de trabalho abraçou essas duas linguagens, com mais de 70% dos anúncios de vagas para cientistas de dados, retirados de sites como LinkedIn, Indeed, SimplyHired e Monster em outubro de 2018, mencionando Python e mais de 60% mencionando R.</p>
+<p><img alt="" src="https://github.com/tmfilho/pyestbook/raw/c53bb64992b805325fd0f982d5aa5f4ff96d7dd9/content/images/job-listings.png" /></p>
+<p>20 habilidades mais mencionadas em anúncios de vagas para cientistas de dados {cite}haleSkill2018. :::</p>
+<p>Para completar esta motivação, geramos a tabela abaixo usando Python e a biblioteca pandas, dando um gostinho do que vem por aí. Os dados foram obtidos por meio da plataforma Google Trends e representam o interesse mundial por quatro tópicos de buscas no Google: Python, R, aprendizagem de máquina e ciência de dados. A quantidade de buscas de cada tópico foi medida semanalmente. O código abaixo calcula o índice de correlação de Spearman do interesse semanal de cada um dos tópicos e todos os outros. Os valores calculados indicam que há relação entre o crescimento do interesse em ciência de dados e aprendizagem de máquina e a quantidade de buscas relacionadas a R e Python. Esta última apresentou correlações quase perfeitas com ciência de dados e aprendizagem de máquina, mostrando que o seu crescimento nos últimos 5 anos está diretamente conectado ao crescimento da importância dessas áreas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://tmfilho.github.io/pyestbook/data/google-trends-timeline.csv&#39;</span>
+<span class="n">trends</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">trends</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;spearman&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Python</th>
+      <th>R</th>
+      <th>Machine learning</th>
+      <th>Data science</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Python</th>
+      <td>1.000000</td>
+      <td>0.369220</td>
+      <td>0.964809</td>
+      <td>0.967090</td>
+    </tr>
+    <tr>
+      <th>R</th>
+      <td>0.369220</td>
+      <td>1.000000</td>
+      <td>0.287584</td>
+      <td>0.254663</td>
+    </tr>
+    <tr>
+      <th>Machine learning</th>
+      <td>0.964809</td>
+      <td>0.287584</td>
+      <td>1.000000</td>
+      <td>0.961119</td>
+    </tr>
+    <tr>
+      <th>Data science</th>
+      <td>0.967090</td>
+      <td>0.254663</td>
+      <td>0.961119</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>O código abaixo gera um gráfico com as quatro séries temporais de interesse. Os valores são relativos ao maior valor de interesse no período, que nesse caso equivale ao interesse por Python em setembro de 2019.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plot</span> <span class="o">=</span> <span class="n">trends</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Semana&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/python_engenheiros_4_0.png" src="../_images/python_engenheiros_4_0.png" />
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+            
+
+
+
+<div class='prev-next-bottom'>
+    
+    <div id="prev">
+        <a class="left-prev" href="about_py.html" title="previous page">
+            <i class="prevnext-label fas fa-angle-left"></i>
+            <div class="prevnext-info">
+                <p class="prevnext-label">previous</p>
+                <p class="prevnext-title">About Python</p>
+            </div>
+        </a>
+    </div>
+     <div id="next">
+        <a class="right-next" href="getting_started.html" title="next page">
+            <div class="prevnext-info">
+                <p class="prevnext-label">next</p>
+                <p class="prevnext-title">Setting up Your Python Environment</p>
+            </div>
+            <i class="prevnext-label fas fa-angle-right"></i>
+        </a>
+     </div>
+
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+          By Erison Rosa de Oliveira Barros<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
