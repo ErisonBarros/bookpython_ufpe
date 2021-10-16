@@ -2,6 +2,7 @@ format: jb-article
 root: docs/index
 sections:
 - file: docs/about_py
+- file: docs/python_engenheiros
 - file: docs/getting_started
 - file: docs/python_by_example
 - file: docs/learn_more
