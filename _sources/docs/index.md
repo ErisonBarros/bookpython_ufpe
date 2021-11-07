@@ -1,4 +1,3 @@
-
 # Python para Engenheiros Cartografos e Agrimensores
 > **Departamento de Engenharia Cartógrafica - Decart**
 
