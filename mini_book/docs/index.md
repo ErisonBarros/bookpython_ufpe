@@ -14,6 +14,9 @@ Material desenvolvido para as aula de Processamento de dados.
 > 6. Métodos de Filtro e Agrupamento no Pandas
 > 8. Biblioteca Geopandas
 
+# Roteiro da Aula Sincrona
+> [Roteiro da Aula](https://raw.githubusercontent.com/ErisonBarros/bookpython_ufpe/master/Roteiro_da_Aula_de_Python_.ipynb)
+
 ## Demais Contéudos:
 > Nootebooks
 
