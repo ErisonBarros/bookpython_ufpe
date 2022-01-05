@@ -41,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -160,7 +160,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -178,7 +178,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -222,7 +222,126 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Python para Engenheiros Cartografos e Agrimensores</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Python para Engenheiros Cartografos e Agrimensores
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#conteudo">
+     Conteúdo
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#roteiro-da-aula-sincrona">
+   Roteiro da Aula Sincrona
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#demais-conteudos">
+     Demais Contéudos:
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#demais-material-sobre-python">
+       Demais material sobre python
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="python-para-engenheiros-cartografos-e-agrimensores">
+<h1>Python para Engenheiros Cartografos e Agrimensores<a class="headerlink" href="#python-para-engenheiros-cartografos-e-agrimensores" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p><strong>Departamento de Engenharia Cartógrafica - Decart</strong></p>
+</div></blockquote>
+<blockquote>
+<div><p>Prof. Erison Rosa de Oliveira Barros</p>
+</div></blockquote>
+<p>Material desenvolvido para as aula de Processamento de dados.</p>
+<div class="section" id="conteudo">
+<h2>Conteúdo<a class="headerlink" href="#conteudo" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="simple">
+<li><p>[Importância e Aplicação do Python] (<a class="reference external" href="https://erisonbarros.github.io/bookpython_ufpe/docs/about_py.html">https://erisonbarros.github.io/bookpython_ufpe/docs/about_py.html</a>)</p></li>
+<li><p>Logic de Programação  em Python</p></li>
+<li><p>Bibliotecas: Instalações e importações</p></li>
+<li><p>Importando a Base de Dados para o Python</p></li>
+<li><p>Ajustes de Visualização de dados no pandas</p></li>
+<li><p>Métodos de Filtro e Agrupamento no Pandas</p></li>
+<li><p>Biblioteca Geopandas</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="roteiro-da-aula-sincrona">
+<h1>Roteiro da Aula Sincrona<a class="headerlink" href="#roteiro-da-aula-sincrona" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p><a class="reference external" href="https://colab.research.google.com/drive/1AXIIVO1RxqlALLLQ_BioY-nl0SOy9ttc?usp=sharing">Roteiro da Aula</a></p>
+</div></blockquote>
+<div class="section" id="demais-conteudos">
+<h2>Demais Contéudos:<a class="headerlink" href="#demais-conteudos" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Nootebooks</p>
+</div></blockquote>
+<div class="section" id="demais-material-sobre-python">
+<h3>Demais material sobre python<a class="headerlink" href="#demais-material-sobre-python" title="Permalink to this headline">¶</a></h3>
+<p><img alt=" " src="https://i.ibb.co/vjjRjKj/Pythons.jpg" /></p>
+</div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -307,15 +426,13 @@
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Erison Rosa de Oliveira Barros<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Erison Rosa de Oliveira Barros<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

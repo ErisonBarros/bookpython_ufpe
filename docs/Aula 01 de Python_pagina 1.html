@@ -41,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -159,7 +159,7 @@
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -177,7 +177,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -200,7 +200,93 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Python</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#objetivos">
+   Objetivos
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#por-que-estudar-python">
+   Por que estudar Python?
+  </a>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="python">
+<h1>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
+<p><em>Prof. Erison Barros</em></p>
+<div class="section" id="objetivos">
+<h2>Objetivos<a class="headerlink" href="#objetivos" title="Permalink to this headline">¶</a></h2>
+<p>Este material foi escrito com o objetivo de introduzir Engenheiros Cartógrafos e Agrimensores  e  e estudantes de Estatística aos conceitos fundamentais da linguagem Python, bem como apresentá-los às ferramentas que mais lhe podem ser úteis, incluindo bibliotecas de computação matemática, visualização de dados, manipulação de bases e bancos de dados, ferramentas de aprendizagem de máquina, computação paralela, computação em GPU, inferência Bayesiana e criação e consumo de API’s Web.</p>
+<p>Python é uma linguagem de programação interpretada, de alto nível e de propósito geral. Seu criador, Guido van Rossum, enfatizou legibilidade de código e sua abordagem de orientação a objetos permite que projetos de diversos tamanhos sejam desenvolvidos usando código simples, lógico e fácil de entender, devido a sua sintaxe clara. Além da orientação a objetos, Python também oferece suporte a outros paradigmas de programação, como programação estruturada e programação funcional.</p>
+<p>Python é visualmente mais “limpa” do que outras linguagens, além de ser mais intuitiva, pois frequentemente usa palavras da língua inglesa onde outras linguagens usariam pontuações. O nome da linguagem é um tributo ao grupo de comédia britânico Monty Python, o que inspirou os desenvolvedores a fazer com que a linguagem seja divertida de usar. Essa abordagem de desenvolvimento inspirou a criação do neologismo “pythonico”, que quer dizer que o código é natural e está de acordo com a filosofia minimalita e de ênfase na legibilidade. Por outro lado, códigos difíceis de entender or ler são chamados de não-pythonicos. Usuários e admiradores de Python, sobretudo aqueles considerados mais experientes costumam ser chamados de Pythonistas.</p>
+<p>[========]</p>
+</div>
+<div class="section" id="por-que-estudar-python">
+<h2>Por que estudar Python?<a class="headerlink" href="#por-que-estudar-python" title="Permalink to this headline">¶</a></h2>
+<p>Em 2017, o Stack Overflow, website de perguntas e respostas destinado a desenvolvedores, publicou um estudo sobre o rápido crescimento no interesse pela linguagem Python [2]. O estudo considerou apenas o interesse de usuários de países de alta renda e naturalmente avaliou apenas resultados até a sua publicação. A Fig. 1, obtida por meio da ferramenta Stack Overflow Trends, apresenta as curvas para as mesmas linguagens, considerando usuários de todo o mundo (o que muda as curvas em relação ao estudo citado) e resultados até o meio de 2019. Até o meio de 2012, Python era a sexta linguagem menos buscada das 7 analisadas, tornando-se a linguagem de maior interesse apenas 6 anos depois, no meio de 2018.</p>
+<p>Esse crescimento do interesse por Python extremamente acentuado a partir de 2012 está conectado ao avanço da área de ciência de dados e conhecimentos relacionados, como aprendizagem de máquina, big data, business analytics, entre outras. Python e R costumam ser as linguagens mais citadas por cientistas de dados em seus perfis em redes sociais como LinkedIn. Segundo análise da Initiative for Analytics and Data Science Standards (IADSS) [3], 100% dos cientistas de dados mencionam conhecimento de Python em seus perfis, enquanto 84% mencionam R. Além disso, como mostra a Fig. 2, o mercado de trabalho abraçou essas duas linguagens, com mais de 70% dos anúncios de vagas para cientistas de dados, retirados de sites como LinkedIn, Indeed, SimplyHired e Monster em outubro de 2018, mencionando Python e mais de 60% mencionando R.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+url = &#39;https://tmfilho.github.io/pyestbook/data/google-trends-timeline.csv&#39;
+trends = pd.read_csv(url, index_col=0, parse_dates=True)
+trends.corr(method=&#39;spearman&#39;)
+</pre></div>
+</div>
+<p>O código abaixo gera um gráfico com as quatro séries temporais de interesse. Os valores são relativos ao maior valor de interesse no período, que nesse caso equivale ao interesse por Python em setembro de 2019.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>import matplotlib.pyplot as plt
+plot = trends.plot()
+plt.xlabel(&#39;Semana&#39;, fontsize=16)
+plt.show()
+</pre></div>
+</div>
+<p>Fonte: <a class="reference external" href="https://tmfilho.github.io/pyestbook/guide/01_first.html">https://tmfilho.github.io/pyestbook/guide/01_first.html</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -266,15 +352,13 @@ plt.show()
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Erison Rosa de Oliveira Barros<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Erison Rosa de Oliveira Barros<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 

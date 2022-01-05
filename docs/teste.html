@@ -41,7 +41,7 @@
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
     <script>
         const thebe_selector = ".thebe"
@@ -159,7 +159,7 @@
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
@@ -194,7 +194,7 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
             <div class="tocsection onthispage pt-5 pb-3">
                 <i class="fas fa-list"></i> Contents
@@ -312,7 +312,1145 @@
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
+    <!-- Table of contents that is only displayed when printing the page -->
+    <div id="jb-print-docs-body" class="onlyprint">
+        <h1>Visualizando e operando com nuvens de pontos em Caderno Jupyter</h1>
+        <!-- Table of contents -->
+        <div id="print-main-content" class="row">
+            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
+            <div id="jb-print-toc">
+                
+                <div>
+                    <h2> Contents </h2>
+                </div>
+                <nav aria-label="Page">
+                    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Visualizando e operando com nuvens de pontos em Caderno Jupyter
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#como-importar-a-nuvem">
+   Como importar a nuvem?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-pela-numpy">
+   Import pela Numpy:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-pela-pandas">
+   Import pela Pandas:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-pela-pyntcloud">
+   Import pela Pyntcloud:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#import-pela-open3d">
+   Import pela Open3D:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizacao-com-a-pyntcloud">
+   Visualização com a PyntCloud:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizacao-com-a-ipyvolume">
+   Visualização com a ipyVolume:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizacao-com-a-open3d">
+   Visualização com a Open3d:
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kd-trees-octrees-pytncloud">
+   Kd-trees &amp; Octrees: Pytncloud
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kd-trees-octrees-open3d">
+   Kd-trees &amp; Octrees: Open3D
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#voxializacao">
+   Voxialização
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#filtragem">
+   Filtragem
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#registro-de-pares-de-nuvens-de-pontos">
+   Registro de pares de nuvens de pontos
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#registro-global-1-ransac-based-on-feature-match">
+   Registro Global 1: RANSAC BASED ON FEATURE MATCH
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#registro-global-2-fast-global-registration-zhou-2016">
+   Registro Global 2: FAST-GLOBAL-REGISTRATION (ZHOU, 2016)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#refinamento-do-registro-global-1-por-icp-ponto-ponto">
+   Refinamento do registro global 1 por ICP-PONTO-PONTO
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#refinamento-do-registro-global-1-por-icp-ponto-plano">
+   Refinamento do registro global 1 por ICP-PONTO-PLANO
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#refinamento-do-registro-global-2-por-icp-ponto-ponto">
+   Refinamento do registro global 2 por ICP-PONTO-PONTO
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#refinamento-do-registro-global-2-por-icp-ponto-plano">
+   Refinamento do registro global 2 por ICP-PONTO-PLANO
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentacao">
+   Segmentação
+  </a>
+ </li>
+</ul>
+
+                </nav>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="visualizando-e-operando-com-nuvens-de-pontos-em-caderno-jupyter">
+<h1>Visualizando e operando com nuvens de pontos em Caderno Jupyter<a class="headerlink" href="#visualizando-e-operando-com-nuvens-de-pontos-em-caderno-jupyter" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preparar o ambiente no Google Drive:</span>
+<span class="c1">#from google.colab import drive</span>
+<span class="c1">#drive.mount(&#39;/content/gdrive&#39;)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instalar as seguintes bibliotecas se for rodar no Colab:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Instalar bibliotecas que iremos utilizar</span>
+<span class="c1"># Bibliotecas para uso geral</span>
+<span class="c1">#!pip install numpy</span>
+<span class="c1">#!pip install pandas</span>
+<span class="c1"># Biblioteca para manipulação e vizualização de nuvens de pontos</span>
+<span class="c1">#!pip install ipyvolume </span>
+<span class="c1">#!pip install pyntcloud</span>
+<span class="c1">#!pip install open3d</span>
+<span class="c1">#!ls # para importar dados do Google Drive</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar Bibliotecas</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">ipyvolume</span> <span class="k">as</span> <span class="nn">ipv</span>
+<span class="kn">import</span> <span class="nn">open3d</span> <span class="k">as</span> <span class="nn">o3d</span>
+<span class="kn">from</span> <span class="nn">open3d</span> <span class="kn">import</span> <span class="n">JVisualizer</span>
+<span class="kn">from</span> <span class="nn">pyntcloud</span> <span class="kn">import</span> <span class="n">PyntCloud</span> <span class="k">as</span> <span class="n">pytc</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="como-importar-a-nuvem">
+<h1>Como importar a nuvem?<a class="headerlink" href="#como-importar-a-nuvem" title="Permalink to this headline">¶</a></h1>
+<p>Uma nuvem de pontos pode se apresentar em diversos formatos, o mais básico desses formatos é simplesmente um arquivo ascii (txt.) com 3 colunas contendo xyz. Quatro das bibliotecas utilizadas permitem esse tipo de importação, mas algumas são mais eficientes que outras. Outro problema diz respeito à formatação e tipo de dado disponível, que pode ser de simples precisão (float32) ou dupla precisão (flaot64). Vamos aos testes: importar uma nuvem pequena (269 mil pontos, colunas separadas por vírgulas) com todas as bibliotecas que permitem isso:</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="import-pela-numpy">
+<h1>Import pela Numpy:<a class="headerlink" href="#import-pela-numpy" title="Permalink to this headline">¶</a></h1>
+<p>A numpy lê a nuvem como uma matriz de 269 mil linhas e 3 colunas, é a mais lenta das formas de importação, demora cerca de 2,1 segundos para ler uma nuvem com 268879 pts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tempo_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pc_numpy</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_airborne-LiDAR_no_centroide.xyz&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="n">tempo_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tempo_i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_numpy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pc_numpy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tempo para ler a nuvem: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">tempo_f</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ -53.03132588  185.44361056    0.65855475]
+ [ -53.25012588  185.56861056    0.64455475]
+ [ -53.45322588  185.63111056    0.65455475]
+ ...
+ [  51.87487412 -181.99388944   -2.18944525]
+ [  51.59367412 -181.93138944   -2.22444525]
+ [  51.29677412 -181.80638944   -2.20144525]]
+268879
+Tempo para ler a nuvem: 2.214
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="import-pela-pandas">
+<h1>Import pela Pandas:<a class="headerlink" href="#import-pela-pandas" title="Permalink to this headline">¶</a></h1>
+<p>Um data frame precisa de índices para nomear as colunas dos dados, então vamos nomear as colunas com os nomes x, y e z para que a primeira linha de coordenadas não seja interpretada como índices de colunas. A leitura é 10x mais rápida do que pela numpy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tempo_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pc_pandas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_airborne-LiDAR_no_centroide.xyz&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">])</span>
+<span class="n">tempo_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tempo_i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_pandas</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">pc_pandas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tempo para ler a nuvem: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">tempo_f</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                x           y         z
+0      -53.031326  185.443611  0.658555
+1      -53.250126  185.568611  0.644555
+2      -53.453226  185.631111  0.654555
+3      -53.672026  185.693611  0.650555
+4      -53.859426  185.756111  0.638555
+...           ...         ...       ...
+268874  52.421774 -182.181389 -2.223445
+268875  52.156174 -182.118889 -2.237445
+268876  51.874874 -181.993889 -2.189445
+268877  51.593674 -181.931389 -2.224445
+268878  51.296774 -181.806389 -2.201445
+
+[268879 rows x 3 columns]
+Tempo para ler a nuvem: 0.189
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="import-pela-pyntcloud">
+<h1>Import pela Pyntcloud:<a class="headerlink" href="#import-pela-pyntcloud" title="Permalink to this headline">¶</a></h1>
+<p>Por trás da Pyntcloud roda a função read_csv da pandas para importar dados, mas a pyntcloud cria um objeto próprio.
+Precisamos que o dado esteja formatado com colunas que possuam nomes x, y e z. Isso é feito dando o argumento ‘names’  à função de leitura da PyntCloud (que igual à read_csv da pandas). O tempo de leitura é semelhante também.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tempo_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pc_pyntcloud</span> <span class="o">=</span> <span class="n">pytc</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s1">&#39;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_airborne-LiDAR_no_centroide.xyz&#39;</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">])</span>
+<span class="n">tempo_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tempo_i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_pyntcloud</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">pc_pyntcloud</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tempo para ler a nuvem: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">tempo_f</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyntCloud
+268879 points with 0 scalar fields
+0 faces in mesh
+0 kdtrees
+0 voxelgrids
+Centroid: 3.0625871847689797e-09, -4.6036352185236944e-11, 3.3030529579523296e-14
+Other attributes:
+
+Tempo para ler a nuvem: 0.198
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="import-pela-open3d">
+<h1>Import pela Open3D:<a class="headerlink" href="#import-pela-open3d" title="Permalink to this headline">¶</a></h1>
+<p>A Open3D consegue ler arquivos pcd, ply e ascii como: xyz, xyzrgb, xyzn e pts. Todavia, no caso dos tipos ascii, ela não consegue ler dados separados por vírgula. Podemos contornar isso utilizando a função da Open3d que lê a matriz numpy gerada anteriormente:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tempo_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pc_open3d</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">PointCloud</span><span class="p">()</span>
+<span class="n">pc_open3d</span><span class="o">.</span><span class="n">points</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">utility</span><span class="o">.</span><span class="n">Vector3dVector</span><span class="p">(</span><span class="n">pc_numpy</span><span class="p">)</span>
+<span class="n">tempo_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tempo_i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_open3d</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">pc_open3d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tempo para ler a nuvem: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">tempo_f</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::PointCloud with 268879 points.
+Tempo para ler a nuvem: 0.008
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ou, simplemente lendo a nuvem no formato pcd (é pelo menos 3x mais rápida que a Pandas):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tempo_i</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">pc_open3d</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_airborne-LiDAR_no_centroide.pcd&quot;</span><span class="p">)</span>
+<span class="n">tempo_f</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tempo_i</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_open3d</span><span class="p">)</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">pc_open3d</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tempo para ler a nuvem: </span><span class="si">%.3f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">tempo_f</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::PointCloud with 268879 points.
+Tempo para ler a nuvem: 0.068
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="visualizacao-com-a-pyntcloud">
+<h1>Visualização com a PyntCloud:<a class="headerlink" href="#visualizacao-com-a-pyntcloud" title="Permalink to this headline">¶</a></h1>
+<p>A visualização da pyntcloud aparece com os pontos em tamanhos exagerados, mas é possível alterar isso facilmente e por algum valor entre 0 e 1 para que a nuvem apareça normalmente. Não funciona no colab, ele desconectará assim que rodarmos o seguinte comando:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/rubens/.local/lib/python3.6/site-packages/pythreejs/traits.py:191: UserWarning: 64-bit data types not supported for WebGL data, casting to 32-bit.
+  warnings.warn(&#39;64-bit data types not supported for WebGL &#39;
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "7a7d82a1f4124fc3af7007ae4528750c", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "3a4ed3d8b5924669bd7bc7cc831503e1", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="visualizacao-com-a-ipyvolume">
+<h1>Visualização com a ipyVolume:<a class="headerlink" href="#visualizacao-com-a-ipyvolume" title="Permalink to this headline">¶</a></h1>
+<p>A ipyVolume permite animações e muitos outros recursos da ipywidgets incorporados na sua implementação.
+Todavia, a renderização é mais complexa e pode ficar lenta dependendo do seu hardware. Para plotar os pontos precisamos das colunas da matriz numpy:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pc_numpy</span><span class="p">[:,</span><span class="mi">0</span><span class="p">];</span><span class="n">y</span> <span class="o">=</span> <span class="n">pc_numpy</span><span class="p">[:,</span><span class="mi">1</span><span class="p">];</span><span class="n">z</span> <span class="o">=</span> <span class="n">pc_numpy</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">ipv</span><span class="o">.</span><span class="n">quickscatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;sphere&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "545eea25ff014afd8ff755a690b60ed4", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="visualizacao-com-a-open3d">
+<h1>Visualização com a Open3d:<a class="headerlink" href="#visualizacao-com-a-open3d" title="Permalink to this headline">¶</a></h1>
+<p>A Open3d não suporta visualizações dentro de cadernos jupyter, mas mesmo assim desenha a nuvem em uma janela a parte. Essa nuvem não aparece se os dados estiverem em coordenadas UTM.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pc_open3d</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="kd-trees-octrees-pytncloud">
+<h1>Kd-trees &amp; Octrees: Pytncloud<a class="headerlink" href="#kd-trees-octrees-pytncloud" title="Permalink to this headline">¶</a></h1>
+<p>Kd-trees e octrees são estruturas muito utilizadas quando manipulamos nuvens de pontos. A maioria dos filtros e diversas outras funcionalidades necessitam de kd-trees e octrees para funcionar. O nome tree (árvore) se deve à forma como o objeto é criado através de subdivisões do espaço. Apenas as bibliotecas Open3D e Pyncloud, específicas para nuvens de pontos, trabalham com este objeto.</p>
+<p>No exemplo abaixo utilizamos uma kd-tree para selecionar os k vizinhos mais próximos de cada ponto da nuvem. A estrutura gerada é uma matriz com k colunas com os índices dos pts mais próximos.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionar estrutura kdtree na nuvem:</span>
+<span class="n">kdtree_pyntcloud</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_structure</span><span class="p">(</span><span class="s2">&quot;kdtree&quot;</span><span class="p">)</span>
+<span class="c1"># Guardar k vizinhos de cada ponto:</span>
+<span class="n">k_vizinhos</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">kdtree</span><span class="o">=</span><span class="n">kdtree_pyntcloud</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">k_vizinhos</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[     8      1      7      2      6      3]
+ [     7      8      2      0      6      3]
+ [     6      7      1      3      5      8]
+ ...
+ [268847 268848 268877 268875 268846 268849]
+ [268846 268847 268876 268878 268845 268848]
+ [268845 268846 268877 268844 268847 268876]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>A função abaixo permite subdividir o espaço ocupado pela nuvem com uma octree. Os parâmetros da subdivisão podem ser a quantidade de voxels finais desejados em cada eixo (n_x=1, n_y=1, n_z=1) ou o tamanho dos voxels criados em cada eixo (size_x=1.0, size_y=1.0, size_z=1.0). Colocar valores pequenos nos tamanhos (abaixo de 0.5) ou muito grandes nas quantidades finais (acima de 100) costuma travar o Jupyter por falta de memória. Setar ‘None’ nos tamanhos se quiser usar as quantidades.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionar octree na nuvem importada com a Pyntcloud</span>
+<span class="n">voxelgrid_pyntcloud</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_structure</span><span class="p">(</span><span class="s2">&quot;voxelgrid&quot;</span><span class="p">,</span> <span class="n">n_x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_z</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">size_x</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size_y</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">size_z</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">voxelgrid_pyntcloud</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>V([369, 369, 369],[1.0, 1.0, 1.0],True)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="kd-trees-octrees-open3d">
+<h1>Kd-trees &amp; Octrees: Open3D<a class="headerlink" href="#kd-trees-octrees-open3d" title="Permalink to this headline">¶</a></h1>
+<p>Kdtrees na Open3D são implementadas utilizando o algoritmo FLANN (Fast Library for Approximate Nearest Neighbors). Diferente da pyntcloud, esse algoritmo não procura todos os pontos mais pŕoximos por força bruta.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pinta a nuvem de amarelo:</span>
+<span class="n">pc_open3d</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># Cria a kd-tree na nuvem usando flann:</span>
+<span class="n">pcd_tree</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeFlann</span><span class="p">(</span><span class="n">pc_open3d</span><span class="p">)</span>
+
+<span class="c1"># Pinta o ponto de indice 100000 de vermelho:</span>
+<span class="n">pc_open3d</span><span class="o">.</span><span class="n">colors</span><span class="p">[</span><span class="mi">100000</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Procura os 1000 pontos vizinhos do ponto anterior:</span>
+<span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcd_tree</span><span class="o">.</span><span class="n">search_knn_vector_3d</span><span class="p">(</span><span class="n">pc_open3d</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Pinta os vizinhos de azul:</span>
+<span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pc_open3d</span><span class="o">.</span><span class="n">colors</span><span class="p">)[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Encontra os vizinhos com distância menor que 5 m:</span>
+<span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">_</span><span class="p">]</span> <span class="o">=</span> <span class="n">pcd_tree</span><span class="o">.</span><span class="n">search_radius_vector_3d</span><span class="p">(</span><span class="n">pc_open3d</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="mi">100000</span><span class="p">],</span><span class="mf">5.0</span><span class="p">)</span>
+
+<span class="c1"># Pinta os vizinhos dentro dos 5 m de preto:</span>
+<span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">pc_open3d</span><span class="o">.</span><span class="n">colors</span><span class="p">)[</span><span class="n">idx</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Plota a nuvem:</span>
+<span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pc_open3d</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A linha baixo cria uma octree com 64 voxels utilizando a Open3D, para isso ela divide um cubo de 1 m³ centrado em [0,0,0] em cubos menores de 0.25 m de largura, o que dá 4x4x4 voxels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">VoxelGrid</span><span class="o">.</span><span class="n">create_dense</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">],</span><span class="mf">0.25</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::VoxelGrid with 64 voxels.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="voxializacao">
+<h1>Voxialização<a class="headerlink" href="#voxializacao" title="Permalink to this headline">¶</a></h1>
+<p>Quando temos uma nuvem muito grande é coveniente que se faça uma voxialização para reduzir seu tamanho. Além de deixá-la com densidade uniforme, essa operação consegue reduzir a quantidade de pontos preservando a forma dos objetos. Para o registro a voxialização é crítica pois a operação demanda tempo exponencialmente maior de acordo com o tamanho da nuvem.</p>
+<p>Para a voxialização vamos usar a estrutura voxelgrid criada anteriormente com a pyntcloud (voxels com 1m³ de tamanho)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pc_voxializada_pyntcloud</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">get_sample</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;voxelgrid_centers&#39;</span><span class="p">,</span><span class="n">as_PyntCloud</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">voxelgrid_id</span><span class="o">=</span><span class="n">voxelgrid_pyntcloud</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_voxializada_pyntcloud</span><span class="p">)</span>
+<span class="c1"># Desenhar nuvem voxializada:</span>
+<span class="n">pc_voxializada_pyntcloud</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PyntCloud
+83736 points with 0 scalar fields
+0 faces in mesh
+0 kdtrees
+0 voxelgrids
+Centroid: 0.8215575814247131, 0.8175594210624695, 0.24738658964633942
+Other attributes:
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "4c7d23b11ce6414f9cde294651d0322b", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "43f191854a56435986cdc87e68fb8b1c", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<p>A open3d faz a voxialização direto na nuvem, recebe como parâmetro apenas o tamanho do voxel, quanto maior, menos pontos na nuvem final:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pc_voxializada_open3d</span> <span class="o">=</span> <span class="n">pc_open3d</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pc_voxializada_open3d</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pc_voxializada_open3d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::PointCloud with 82319 points.
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="filtragem">
+<h1>Filtragem<a class="headerlink" href="#filtragem" title="Permalink to this headline">¶</a></h1>
+<p>Filtragens são feitas considerando uma vizinhança mínima que deve existir ao redor de um ponto. Essa vizinhança pode ser definida como um raio geométrico ao redor do ponto ou por um desvio-padrão. No primeiro caso temos o filtro por raio, no segundo o filtro estatístico. Recomenda-se fazer a filtragem sempre após a voxialização.</p>
+<p>A filtragem utiliza kd-trees para encontrar vizinhos mais próximos, na pyntcloud precisamos construir a kd-tree da nuvem voxializada que será filtrada:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kdtree_filtragem</span> <span class="o">=</span> <span class="n">pc_voxializada_pyntcloud</span><span class="o">.</span><span class="n">add_structure</span><span class="p">(</span><span class="s2">&quot;kdtree&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># RADIOS OUTLIER REMOVAL.</span>
+<span class="c1"># ENTRADAS: r=raio, k=nº_de_vizinhos, kdtree_id;   </span>
+<span class="c1"># SAÍDAS: índices dos pontos filtrados.</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">pc_voxializada_pyntcloud</span><span class="o">.</span><span class="n">get_filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;ROR&#39;</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">r</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span><span class="n">kdtree_id</span><span class="o">=</span><span class="n">kdtree_filtragem</span><span class="p">)</span>
+
+<span class="n">pts_filtrados</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pontos filtrados: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">pts_filtrados</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.         1.00221252 1.41577892 1.41577892 1.41739923 2.00440979]
+ [0.         1.         1.00219727 1.41576812 1.41576812 1.41577892]
+ [0.         1.         1.         1.00219727 1.00221252 1.00229269]
+ ...
+ [0.         1.         1.         1.00219727 1.41576812 1.41576812]
+ [0.         1.         1.00219727 1.41576812 2.         2.00440979]
+ [0.         1.00219727 1.41576812 1.41576812 2.00439453 2.23705149]]
+pontos filtrados: 3677
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># STATISTIICAL OUTLIER REMOVAL.</span>
+<span class="c1"># ENTRADAS: z_max=desvio_padrao, k=nº_de_vizinhos, kdtree_id;   </span>
+<span class="c1"># SAÍDAS: índices dos pontos filtrados.</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">pc_voxializada_pyntcloud</span><span class="o">.</span><span class="n">get_filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;SOR&#39;</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">z_max</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span><span class="n">kdtree_id</span><span class="o">=</span><span class="n">kdtree_filtragem</span><span class="p">)</span>
+
+<span class="n">pts_filtrados</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span><span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pontos filtrados: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">pts_filtrados</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 1.74350599  0.66420449 -0.66907319 ...  0.21815981  1.92244333
+  2.62276719]
+pontos filtrados: 3101
+</pre></div>
+</div>
+</div>
+</div>
+<p>Os mesmos filtros aplicados na mesma nuvem com os mesmos parâmetros produzem resultados diferentes na Open3D. Isso ocorre porque como mencionado anteriormente, o algoritmo da kd-tree é diferente. Além disso, as voxializações produziram nuvens com quantidades de pontos ligeiramente diferentes, mesmo que o tamanho do voxel utilizado tenha sido o mesmo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FILTRO POR RAIO.</span>
+<span class="c1"># ENTRADAS: Raio e Quantidade mínima de pontos.</span>
+<span class="c1"># SAÍDAS: nuvem filtrada e índices desses pontos.</span>
+<span class="n">pc_filtrada_raio</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">pc_voxializada_open3d</span><span class="o">.</span><span class="n">remove_radius_outlier</span><span class="p">(</span><span class="n">nb_points</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">1.8</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_filtrada_raio</span><span class="p">)</span>
+
+<span class="n">pts_filtrados</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pc_voxializada_open3d</span><span class="o">.</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">pc_filtrada_raio</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pontos filtrados utilizando um raio de 1.8 m: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">pts_filtrados</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::PointCloud with 79704 points.
+Pontos filtrados utilizando um raio de 1.8 m: 2615
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># FILTRO ESTATÍTISTICO.</span>
+<span class="c1"># ENTRADAS: Desvio-Padrão e Quantidade mínima de pontos.</span>
+<span class="c1"># SAÍDAS: nuvem filtrada e índices desses pontos.</span>
+<span class="n">pc_filtrada_estat</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">pc_voxializada_open3d</span><span class="o">.</span><span class="n">remove_statistical_outlier</span><span class="p">(</span><span class="n">nb_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">std_ratio</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_filtrada_estat</span><span class="p">)</span>
+
+<span class="n">pts_filtrados</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pc_voxializada_open3d</span><span class="o">.</span><span class="n">points</span><span class="p">)</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">pc_filtrada_estat</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pontos filtrados utilizando 1 desvio-padrão: </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span><span class="k">pts_filtrados</span>)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::PointCloud with 79634 points.
+Pontos filtrados utilizando 1 desvio-padrão: 2685
+</pre></div>
+</div>
+</div>
+</div>
+<p>Por algum motivo desconhecido a função ‘select_down_sample’ faz o Kernel do jupyter parar de funcionar, como nenhuma informação retorna, não tem-se como investigar o erro. Portanto, infelizmente não conseguiremos mostrar as duas nuvens (inliers e outliers) com a célula abaixo (rodar ela irá parar o Kernel):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Separa as duas nuvens em pontos restantes (inliers) e removidos (outliers)</span>
+<span class="n">pontos_restantes</span> <span class="o">=</span> <span class="n">pc_filtrada_estat</span><span class="o">.</span><span class="n">select_down_sample</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+<span class="n">pontos_removidos</span> <span class="o">=</span> <span class="n">pc_filtrada_estat</span><span class="o">.</span><span class="n">select_down_sample</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">invert</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Coloca cores diferentes nas nuvens:</span>
+<span class="n">pontos_restantes</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>       <span class="c1"># Inliers  -&gt; vermelho</span>
+<span class="n">pontos_removidos</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">,</span><span class="mf">0.8</span><span class="p">])</span> <span class="c1"># outliers -&gt; cinza</span>
+
+<span class="c1"># Desenhar as duas nuvens</span>
+<span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pontos_restantes</span><span class="p">,</span> <span class="n">pontos_removidos</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="registro-de-pares-de-nuvens-de-pontos">
+<h1>Registro de pares de nuvens de pontos<a class="headerlink" href="#registro-de-pares-de-nuvens-de-pontos" title="Permalink to this headline">¶</a></h1>
+<p>Apenas a Open3D tem funções implementadas para fazer o registro de nuvens de pontos. Essas funções se subdividem em registros globais para alinhamento inicial e registros finos, que consistem em variações do ICP (Iterative Closest Point). O registro é simplesmente o alinhamento de duas nuvens no mesmo referencial, portanto, a sua saída é uma matriz de transformação que inclui uma rotação e uma translação em uma única matriz 4x4.</p>
+<p>Para efetuar o registro precisamos de duas nuvens, das normais dos pontos e dos descritores dos pontos. E para o cálculo das normais e dos descritores precisamos da kd-tree. A seguir fazemos todo o pre-processamento:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importar duas nuvens com sobreposição e posições translocadas/rotacionadas:</span>
+<span class="n">pc_open3d_1</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_airborne-LiDAR_transladada-1.pcd&quot;</span><span class="p">)</span>
+<span class="n">pc_open3d_2</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_point_cloud</span><span class="p">(</span><span class="s2">&quot;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_airborne-LiDAR_transladada-2.pcd&quot;</span><span class="p">)</span>
+
+<span class="c1"># Voxializar as nuvens:</span>
+<span class="n">pc_voxializada_1</span> <span class="o">=</span> <span class="n">pc_open3d_1</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">pc_voxializada_2</span> <span class="o">=</span> <span class="n">pc_open3d_2</span><span class="o">.</span><span class="n">voxel_down_sample</span><span class="p">(</span><span class="n">voxel_size</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="c1"># Filtrar as nuvens (filtro estatístico):</span>
+<span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">pc_voxializada_1</span><span class="o">.</span><span class="n">remove_statistical_outlier</span><span class="p">(</span><span class="n">nb_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">std_ratio</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">pc_filtrada_2</span><span class="p">,</span> <span class="n">ind</span> <span class="o">=</span> <span class="n">pc_voxializada_2</span><span class="o">.</span><span class="n">remove_statistical_outlier</span><span class="p">(</span><span class="n">nb_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">std_ratio</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+
+<span class="c1"># Construir kd-tree para calcular normais (30 cm) e outra para calcular descritores (5 m):</span>
+<span class="n">kd_tree_normais</span>     <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">max_nn</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">kd_tree_descritores</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">KDTreeSearchParamHybrid</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">max_nn</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># Calcular normais das nuvens:</span>
+<span class="n">normais_1</span> <span class="o">=</span> <span class="n">pc_filtrada_1</span><span class="o">.</span><span class="n">estimate_normals</span><span class="p">(</span><span class="n">kd_tree_normais</span><span class="p">)</span>
+<span class="n">normais_2</span> <span class="o">=</span> <span class="n">pc_filtrada_2</span><span class="o">.</span><span class="n">estimate_normals</span><span class="p">(</span><span class="n">kd_tree_normais</span><span class="p">)</span>
+
+<span class="c1"># Calcular descritores das nuvens:</span>
+<span class="n">pc_fpfh_1</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">compute_fpfh_feature</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span><span class="n">kd_tree_descritores</span><span class="p">)</span>
+<span class="n">pc_fpfh_2</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">compute_fpfh_feature</span><span class="p">(</span><span class="n">pc_filtrada_2</span><span class="p">,</span><span class="n">kd_tree_descritores</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_filtrada_2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_fpfh_1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pc_fpfh_2</span><span class="p">)</span>
+<span class="n">pc_filtrada_1</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="n">pc_filtrada_2</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+<span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">pc_filtrada_1</span><span class="p">,</span><span class="n">pc_filtrada_2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>geometry::PointCloud with 10166 points.
+geometry::PointCloud with 12376 points.
+registration::Feature class with dimension = 33 and num = 10166
+Access its data via data member.
+registration::Feature class with dimension = 33 and num = 12376
+Access its data via data member.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Função para desenhar o resultado do registro com duas cores diferentes para cada nuvem</span>
+<span class="k">def</span> <span class="nf">draw_registration_result</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">transformation</span><span class="p">):</span>
+    <span class="n">source_temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="n">target_temp</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+    <span class="n">source_temp</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+    <span class="n">target_temp</span><span class="o">.</span><span class="n">paint_uniform_color</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">])</span>
+    <span class="n">source_temp</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">transformation</span><span class="p">)</span>
+    <span class="n">o3d</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">draw_geometries</span><span class="p">([</span><span class="n">source_temp</span><span class="p">,</span> <span class="n">target_temp</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Limites de convergência do registro = tamanho do voxel utilizado</span>
+<span class="c1"># O registro é avaliado contando quantos pontos entre as nuvens estão</span>
+<span class="c1"># abaixo dessa distância  </span>
+<span class="n">limite_distancia</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># Verificar se as nomais dos pontos correspondentes entre a nuvem de origem e destino </span>
+<span class="c1"># são semelhantes. Parâmetro em radianos: 0,17 rad = 10 graus, significa que pontos</span>
+<span class="c1"># homlólogos com normais divergindo acima desse limiar não serão considerados no registro</span>
+<span class="n">limiar_normal</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">CorrespondenceCheckerBasedOnNormal</span><span class="p">(</span><span class="mf">0.17</span><span class="p">)</span>
+
+<span class="c1"># Definir o tipo de registro: (ICP ponto-plano)</span>
+<span class="n">tipo_registro</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPlane</span><span class="p">()</span>
+
+<span class="c1"># Definir parâmetros do algoritmo RANSAC: amostragem mínima de pontos e parada</span>
+<span class="n">ransac_n</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">criterio_parada_RANSAC</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">RANSACConvergenceCriteria</span><span class="p">(</span><span class="mi">4000000</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="registro-global-1-ransac-based-on-feature-match">
+<h1>Registro Global 1: RANSAC BASED ON FEATURE MATCH<a class="headerlink" href="#registro-global-1-ransac-based-on-feature-match" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resultado_RANSAC</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_ransac_based_on_feature_matching</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span>
+                                                                                  <span class="n">pc_filtrada_2</span><span class="p">,</span>
+                                                                                  <span class="n">pc_fpfh_1</span><span class="p">,</span>
+                                                                                  <span class="n">pc_fpfh_2</span><span class="p">,</span>
+                                                                                  <span class="n">limite_distancia</span><span class="p">,</span>
+                                                                                  <span class="n">tipo_registro</span><span class="p">,</span>
+                                                                                  <span class="n">ransac_n</span><span class="p">,</span>
+                                                                                  <span class="p">[</span><span class="n">limiar_normal</span><span class="p">],</span>
+                                                                                  <span class="n">criterio_parada_RANSAC</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultado_RANSAC</span><span class="p">)</span>
+<span class="c1"># Desenhar nuven 1 registrada na nuvem 2:</span>
+<span class="n">draw_registration_result</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">pc_filtrada_2</span><span class="p">,</span><span class="n">resultado_RANSAC</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+<span class="n">resultado_RANSAC</span><span class="o">.</span><span class="n">transformation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registration::RegistrationResult with fitness = 0.000590, inlier_rmse = 0.065582, and correspondence_set size of 6
+Access transformation to get result.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.98250294e-01, -3.33876498e-03,  5.90356062e-02,
+         0.00000000e+00],
+       [-2.16840434e-19,  9.98404586e-01,  5.64648774e-02,
+         0.00000000e+00],
+       [-5.91299429e-02, -5.63660805e-02,  9.96657672e-01,
+         1.12470994e+01],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         1.00000000e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="registro-global-2-fast-global-registration-zhou-2016">
+<h1>Registro Global 2: FAST-GLOBAL-REGISTRATION (ZHOU, 2016)<a class="headerlink" href="#registro-global-2-fast-global-registration-zhou-2016" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Definir parâmetros do registro FGR</span>
+<span class="n">registro_FGR</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">FastGlobalRegistrationOption</span><span class="p">(</span><span class="n">division_factor</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>        <span class="c1"># padrão: 1.4 </span>
+                                                             <span class="n">use_absolute_scale</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>    <span class="c1"># padrão: False</span>
+                                                             <span class="n">decrease_mu</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>           <span class="c1"># padrão: False</span>
+                                                             <span class="n">maximum_correspondence_distance</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span>
+                                                             <span class="n">iteration_number</span> <span class="o">=</span> <span class="mi">640</span><span class="p">,</span>       <span class="c1"># padrão: 64</span>
+                                                             <span class="n">maximum_tuple_count</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">,</span>   <span class="c1"># padrão: 500</span>
+                                                             <span class="n">tuple_scale</span> <span class="o">=</span> <span class="mf">0.9</span><span class="p">)</span>           <span class="c1"># padrão: 0.95)  </span>
+<span class="c1"># Executar registro FGR</span>
+<span class="n">resultado_FGR</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_fast_based_on_feature_matching</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span>
+                                                                             <span class="n">pc_filtrada_2</span><span class="p">,</span> 
+                                                                             <span class="n">pc_fpfh_1</span><span class="p">,</span>
+                                                                             <span class="n">pc_fpfh_2</span><span class="p">,</span>
+                                                                             <span class="n">registro_FGR</span><span class="p">)</span>
+
+<span class="c1"># Desenhar nuven=m 1 registrada na nuvem 2</span>
+<span class="n">draw_registration_result</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">pc_filtrada_2</span><span class="p">,</span> <span class="n">resultado_FGR</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultado_FGR</span><span class="p">)</span>
+<span class="n">resultado_FGR</span><span class="o">.</span><span class="n">transformation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registration::RegistrationResult with fitness = 0.000000, inlier_rmse = 0.000000, and correspondence_set size of 0
+Access transformation to get result.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ -0.16902804,  -0.85284256,   0.49405374,  32.58919827],
+       [ -0.80387037,   0.40932615,   0.43156059, -29.17964453],
+       [ -0.57028235,  -0.32420932,  -0.75476246,  14.12702063],
+       [  0.        ,   0.        ,  -0.        ,   1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="refinamento-do-registro-global-1-por-icp-ponto-ponto">
+<h1>Refinamento do registro global 1 por ICP-PONTO-PONTO<a class="headerlink" href="#refinamento-do-registro-global-1-por-icp-ponto-ponto" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limite</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">tipo_registro</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPoint</span><span class="p">()</span>
+<span class="n">reg_p2p</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span>
+                                            <span class="n">pc_filtrada_2</span><span class="p">,</span>
+                                            <span class="n">limite</span><span class="p">,</span> 
+                                            <span class="n">resultado_RANSAC</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+                                            <span class="n">tipo_registro</span><span class="p">)</span>
+<span class="n">draw_registration_result</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">pc_filtrada_2</span><span class="p">,</span> <span class="n">reg_p2p</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_p2p</span><span class="p">)</span>
+<span class="n">reg_p2p</span><span class="o">.</span><span class="n">transformation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registration::RegistrationResult with fitness = 0.000689, inlier_rmse = 0.061060, and correspondence_set size of 7
+Access transformation to get result.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.98324976,  0.0601479 , -0.17205275, -0.75514635],
+       [-0.04828534,  0.99621173,  0.07232374,  0.7489775 ],
+       [ 0.17575109, -0.06280468,  0.9824292 ,  7.87681687],
+       [ 0.        ,  0.        ,  0.        ,  1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="refinamento-do-registro-global-1-por-icp-ponto-plano">
+<h1>Refinamento do registro global 1 por ICP-PONTO-PLANO<a class="headerlink" href="#refinamento-do-registro-global-1-por-icp-ponto-plano" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ICP PONTO-PLANO</span>
+<span class="n">limite</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">tipo_registro</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPlane</span><span class="p">()</span>
+<span class="n">reg_p2l</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span>
+                                            <span class="n">pc_filtrada_2</span><span class="p">,</span>
+                                            <span class="n">limite</span><span class="p">,</span> 
+                                            <span class="n">resultado_RANSAC</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+                                            <span class="n">tipo_registro</span><span class="p">)</span>
+<span class="n">draw_registration_result</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">pc_filtrada_2</span><span class="p">,</span> <span class="n">reg_p2l</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">reg_p2l</span><span class="p">)</span>
+<span class="n">reg_p2l</span><span class="o">.</span><span class="n">transformation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registration::RegistrationResult with fitness = 0.000000, inlier_rmse = 0.000000, and correspondence_set size of 0
+Access transformation to get result.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 9.98250294e-01, -3.33876498e-03,  5.90356062e-02,
+         0.00000000e+00],
+       [-2.16840434e-19,  9.98404586e-01,  5.64648774e-02,
+         0.00000000e+00],
+       [-5.91299429e-02, -5.63660805e-02,  9.96657672e-01,
+         1.12470994e+01],
+       [ 0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
+         1.00000000e+00]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="refinamento-do-registro-global-2-por-icp-ponto-ponto">
+<h1>Refinamento do registro global 2 por ICP-PONTO-PONTO<a class="headerlink" href="#refinamento-do-registro-global-2-por-icp-ponto-ponto" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limite_distancia</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">tipo_registro</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPoint</span><span class="p">()</span>
+<span class="n">resultado_icp</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span>
+                                                  <span class="n">pc_filtrada_2</span><span class="p">,</span> 
+                                                  <span class="n">limite_distancia</span><span class="p">,</span>
+                                                  <span class="n">resultado_FGR</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+                                                  <span class="n">tipo_registro</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultado_icp</span><span class="p">)</span>
+<span class="n">draw_registration_result</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">pc_filtrada_2</span><span class="p">,</span> <span class="n">resultado_icp</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+<span class="n">resultado_icp</span><span class="o">.</span><span class="n">transformation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registration::RegistrationResult with fitness = 0.000000, inlier_rmse = 0.000000, and correspondence_set size of 0
+Access transformation to get result.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ -0.16902804,  -0.85284256,   0.49405374,  32.58919827],
+       [ -0.80387037,   0.40932615,   0.43156059, -29.17964453],
+       [ -0.57028235,  -0.32420932,  -0.75476246,  14.12702063],
+       [  0.        ,   0.        ,   0.        ,   1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="refinamento-do-registro-global-2-por-icp-ponto-plano">
+<h1>Refinamento do registro global 2 por ICP-PONTO-PLANO<a class="headerlink" href="#refinamento-do-registro-global-2-por-icp-ponto-plano" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">limite_distancia</span> <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">tipo_registro</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">TransformationEstimationPointToPlane</span><span class="p">()</span>
+<span class="n">resultado_icp</span> <span class="o">=</span> <span class="n">o3d</span><span class="o">.</span><span class="n">registration</span><span class="o">.</span><span class="n">registration_icp</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span>
+                                                  <span class="n">pc_filtrada_2</span><span class="p">,</span> 
+                                                  <span class="n">limite_distancia</span><span class="p">,</span>
+                                                  <span class="n">resultado_FGR</span><span class="o">.</span><span class="n">transformation</span><span class="p">,</span>
+                                                  <span class="n">tipo_registro</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">resultado_icp</span><span class="p">)</span>
+<span class="n">draw_registration_result</span><span class="p">(</span><span class="n">pc_filtrada_1</span><span class="p">,</span> <span class="n">pc_filtrada_2</span><span class="p">,</span> <span class="n">resultado_icp</span><span class="o">.</span><span class="n">transformation</span><span class="p">)</span>
+<span class="n">resultado_icp</span><span class="o">.</span><span class="n">transformation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>registration::RegistrationResult with fitness = 0.000000, inlier_rmse = 0.000000, and correspondence_set size of 0
+Access transformation to get result.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ -0.16902804,  -0.85284256,   0.49405374,  32.58919827],
+       [ -0.80387037,   0.40932615,   0.43156059, -29.17964453],
+       [ -0.57028235,  -0.32420932,  -0.75476246,  14.12702063],
+       [  0.        ,   0.        ,   0.        ,   1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="segmentacao">
+<h1>Segmentação<a class="headerlink" href="#segmentacao" title="Permalink to this headline">¶</a></h1>
+<p>A segmentação de nuvens de pontos consiste em separar estruturas com geometrias iguais. O exemplo mais básico que podemos dar é separar estruturas planas de não planas. Faremos isso calculando os autovalores e com eles calculando índices de planaridade, esfericidade, etc,  para segmentar a nuvem. Utilizaremos a pyntcloud porque nela estes cálculos estão implementados.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adicionar estrutura kdtree na nuvem</span>
+<span class="n">pc_kdtree</span>  <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_structure</span><span class="p">(</span><span class="s2">&quot;kdtree&quot;</span><span class="p">)</span>
+
+<span class="c1"># Vizinhanças de cada ponto k</span>
+<span class="n">k_vizinhos</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">kdtree</span><span class="o">=</span><span class="n">pc_kdtree</span><span class="p">)</span>
+
+<span class="c1"># Adicionar colunas dos autovalores (scalar fields)</span>
+<span class="n">autovalores</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_scalar_field</span><span class="p">(</span><span class="s2">&quot;eigen_values&quot;</span><span class="p">,</span> <span class="n">k_neighbors</span><span class="o">=</span><span class="n">k_vizinhos</span><span class="p">)</span>
+
+<span class="c1"># Adicionar Colunas das medidas dimensionais</span>
+<span class="c1"># Planaridade: (e2-e3/e1)</span>
+<span class="n">eigen</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_scalar_field</span><span class="p">(</span><span class="s2">&quot;planarity&quot;</span><span class="p">,</span><span class="n">ev</span><span class="o">=</span><span class="n">autovalores</span><span class="p">)</span>
+<span class="c1"># Anisotropia: (e1-e3/e1)</span>
+<span class="n">eigen</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_scalar_field</span><span class="p">(</span><span class="s2">&quot;anisotropy&quot;</span><span class="p">,</span><span class="n">ev</span><span class="o">=</span><span class="n">autovalores</span><span class="p">)</span>
+<span class="c1"># Esfericidade: (e3/e1)</span>
+<span class="n">eigen</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_scalar_field</span><span class="p">(</span><span class="s2">&quot;sphericity&quot;</span><span class="p">,</span><span class="n">ev</span><span class="o">=</span><span class="n">autovalores</span><span class="p">)</span>
+<span class="c1"># Variância: (e1*e2*e3)^1/2</span>
+<span class="n">eigen</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_scalar_field</span><span class="p">(</span><span class="s2">&quot;omnivariance&quot;</span><span class="p">,</span><span class="n">ev</span><span class="o">=</span><span class="n">autovalores</span><span class="p">)</span>
+<span class="c1"># Entropia: sum[ei*ln(ei)]</span>
+<span class="n">eigen</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">add_scalar_field</span><span class="p">(</span><span class="s2">&quot;eigenentropy&quot;</span><span class="p">,</span><span class="n">ev</span><span class="o">=</span><span class="n">autovalores</span><span class="p">)</span>
+
+<span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">points</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+      <th>e1(21)</th>
+      <th>e2(21)</th>
+      <th>e3(21)</th>
+      <th>planarity(21)</th>
+      <th>anisotropy(21)</th>
+      <th>sphericity(21)</th>
+      <th>omnivariance(21)</th>
+      <th>eigenentropy(21)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-53.031326</td>
+      <td>185.443611</td>
+      <td>0.658555</td>
+      <td>0.460452</td>
+      <td>0.114048</td>
+      <td>0.000276</td>
+      <td>0.247088</td>
+      <td>0.999401</td>
+      <td>0.000599</td>
+      <td>0.024376</td>
+      <td>0.606976</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-53.250126</td>
+      <td>185.568611</td>
+      <td>0.644555</td>
+      <td>0.416906</td>
+      <td>0.125244</td>
+      <td>0.000251</td>
+      <td>0.299811</td>
+      <td>0.999398</td>
+      <td>0.000602</td>
+      <td>0.023579</td>
+      <td>0.627024</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-53.453226</td>
+      <td>185.631111</td>
+      <td>0.654555</td>
+      <td>0.412406</td>
+      <td>0.116085</td>
+      <td>0.000261</td>
+      <td>0.280851</td>
+      <td>0.999368</td>
+      <td>0.000632</td>
+      <td>0.023195</td>
+      <td>0.617420</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-53.672026</td>
+      <td>185.693611</td>
+      <td>0.650555</td>
+      <td>0.412406</td>
+      <td>0.116085</td>
+      <td>0.000261</td>
+      <td>0.280851</td>
+      <td>0.999368</td>
+      <td>0.000632</td>
+      <td>0.023195</td>
+      <td>0.617420</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-53.859426</td>
+      <td>185.756111</td>
+      <td>0.638555</td>
+      <td>0.412406</td>
+      <td>0.116085</td>
+      <td>0.000261</td>
+      <td>0.280851</td>
+      <td>0.999368</td>
+      <td>0.000632</td>
+      <td>0.023195</td>
+      <td>0.617420</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retira do dataFrame todos os pontos que não passam no critério</span>
+<span class="n">planos</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="s2">&quot;planarity(21)&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">]</span>
+<span class="n">arvores</span> <span class="o">=</span> <span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">pc_pyntcloud</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="s2">&quot;planarity(21)&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converte para apenas as primeiras 3 colunas e salva a nuvem de objetos plano</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">planos</span><span class="o">.</span><span class="n">values</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">pts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">pts</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;x&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_pts_planos.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converte para apenas as primeiras 3 colunas e salva a nuvem de objetos não-planos</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">arvores</span><span class="o">.</span><span class="n">values</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">pts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">pts</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="s1">&#39;x&#39;</span><span class="p">},</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pts</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_pts_nao-planos.csv&#39;</span><span class="p">)</span>
+<span class="c1"># A função de escrita da biblioteca PyntCloud não funciona</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nuvem dos objetos planos (pontos com planaridade superior que 0.80)</span>
+<span class="n">nuvem_planos</span> <span class="o">=</span> <span class="n">pytc</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_pts_planos.csv&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">])</span>
+<span class="n">nuvem_planos</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/rubens/.local/lib/python3.6/site-packages/pythreejs/traits.py:191: UserWarning: 64-bit data types not supported for WebGL data, casting to 32-bit.
+  warnings.warn(&#39;64-bit data types not supported for WebGL &#39;
+</pre></div>
+</div>
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "5aefaa95aae44492a571933340b699b0", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "9fd37616526b4cf0877c761383fb51c8", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Nuvem dos objetos não planos (pontos com planaridade inferior a 0.2)</span>
+<span class="n">nuvem_arvores</span> <span class="o">=</span> <span class="n">pytc</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;/home/rubens/rubens_virtual_enviroment/nuvens-LiDAR/nuvem_pts_nao-planos.csv&quot;</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="s2">&quot;z&quot;</span><span class="p">])</span>
+<span class="n">nuvem_arvores</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "b7abefe4fc864dfda480a65f15f8034c", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "ec56d743516d4b979cf8ce1a00354e18", "version_major": 2, "version_minor": 0}
+</script></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </div>
+        </div>
+    </div>
+    <div id="main-content" class="row noprint">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
         
               <div>
@@ -1335,15 +2473,13 @@ Access transformation to get result.
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-          By Erison Rosa de Oliveira Barros<br/>
-        
-            &copy; Copyright 2021.<br/>
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Erison Rosa de Oliveira Barros<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
 </main>
 
 
