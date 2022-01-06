@@ -273,19 +273,20 @@
         </div>
     </div>
 </div>
-    <!-- Table of contents that is only displayed when printing the page -->
-    <div id="jb-print-docs-body" class="onlyprint">
-        <h1>Processamento de Imagens com Python - Tutorial Completo</h1>
-        <!-- Table of contents -->
-        <div id="print-main-content" class="row">
-            <div class="col-12 col-md-12 pl-md-5 pr-md-5">
-            <div id="jb-print-toc">
-                
-                <div>
-                    <h2> Contents </h2>
-                </div>
-                <nav aria-label="Page">
-                    <ul class="visible nav section-nav flex-column">
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Processamento de Imagens com Python - Tutorial Completo</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    Processamento de Imagens com Python - Tutorial Completo
@@ -371,7 +372,9 @@
  </li>
 </ul>
 
-                </nav>
+                        </nav>
+                    </div>
+                </div>
             </div>
             
               <div>
@@ -501,144 +504,11 @@ Nesse processo geramos imagens com dimensões menores. Você pode definir valore
 
               </div>
               
-            </div>
-        </div>
-    </div>
-    <div id="main-content" class="row noprint">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
-                
-  <hr class="docutils" />
-<blockquote>
-<div><p>caberçalho</p>
-</div></blockquote>
-<hr class="docutils" />
-<div class="tex2jax_ignore mathjax_ignore section" id="processamento-de-imagens-com-python-tutorial-completo">
-<h1>Processamento de Imagens com Python - Tutorial Completo<a class="headerlink" href="#processamento-de-imagens-com-python-tutorial-completo" title="Permalink to this headline">¶</a></h1>
-<p><a class="reference external" href="https://minerandodados.com.br/processamento-de-imagens-com-python/">https://minerandodados.com.br/processamento-de-imagens-com-python/</a></p>
-<p>Processar uma imagem significa modificar ou extrair suas informações.</p>
-<p>E é uma tarefa amplamente utilizada quando estamos trabalhando com projetos de visão computacional como por exemplo: reconhecimento facial e detecção de objetos.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># Instalando a biblioteca Pillow:
-!pip install pillow
-import PIL
-</pre></div>
-</div>
-<p>Observação: Instalamos o pillow mas importamos o PIL, isso ocorre porque o desenvolvimento do pillow foi interrompido e as atualizações passaram a ser feitas no PIL(Python Image Library).</p>
-<p>Essa biblioteca nos permite fazer a manipulação de imagens a partir de um script Python.</p>
-<div class="section" id="trabalhando-com-o-pil">
-<h2>Trabalhando com o PIL<a class="headerlink" href="#trabalhando-com-o-pil" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Classe para fazer a manipulação de imagens:</span>
-<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-
-<span class="c1"># Carregar um imagem a partir do disco:</span>
-<span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;imagens/new-york.jpg&quot;</span><span class="p">)</span>
-
-</pre></div>
-</div>
-<p>Vamos trabalhar com essa imagem durante todo o tutorial.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizando a imagem:</span>
-<span class="n">image</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="exibindo-as-propriedades-da-imagem">
-<h2>Exibindo as propriedades da imagem<a class="headerlink" href="#exibindo-as-propriedades-da-imagem" title="Permalink to this headline">¶</a></h2>
-<p>O propósito principal do sistema RGB é a reprodução de cores em dispositivos eletrônicos.</p>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="pixel-e-estrutura-de-dados-de-imagens">
-<h1>Pixel e Estrutura de Dados de Imagens<a class="headerlink" href="#pixel-e-estrutura-de-dados-de-imagens" title="Permalink to this headline">¶</a></h1>
-<p><strong>Pixel</strong> e Estrutura de Dados de Imagens
-Pixel é a menor unidade de informação que compõe uma imagem digital.</p>
-<p>Em uma imagem RGB o pixel é representado por três números de <strong>8 bits</strong> associados com as cores R,G e B que correspondem as cores <strong>Red (Vermelho), Green (Verde) e Blue (Azul)</strong> respectivamente.</p>
-<p>Como são números de 8 bits a faixa de valores é de 0 até 255.</p>
-<p><img alt="" src="https://minerandodados.com.br/wp-content/uploads/2020/01/image-152.png" /></p>
-<p>A cor do Pixel será gerada a partir da combinação de cada um dos canais.</p>
-<p>Se a combinação de valores for 255 a cor do pixel será branco, se a combinação for 0, a cor do Pixel será preto.</p>
-<div class="section" id="convertendo-imagens-para-arrays-numpy">
-<h2>Convertendo Imagens para arrays Numpy<a class="headerlink" href="#convertendo-imagens-para-arrays-numpy" title="Permalink to this headline">¶</a></h2>
-<p>As imagens digitais nada mais são do que matrizes com números e para trabalhar com dados desse tipo nos temos a biblioteca Numpy do Python.</p>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="imprimindo-o-conteudo-do-array-numpy">
-<h1>Imprimindo o conteúdo do array NumPy:<a class="headerlink" href="#imprimindo-o-conteudo-do-array-numpy" title="Permalink to this headline">¶</a></h1>
-<p>print(data)</p>
-<p>Observe que para cada linha nos temos 3 valores que correspondem as tonalidades das cores RGB e cada uma dessas linhas corresponde a 1 pixel.</p>
-<p><img alt="" src="https://minerandodados.com.br/wp-content/uploads/2020/01/image-153.png" /></p>
-<div class="section" id="convertendo-o-array-de-pixels-em-um-objeto-image-pillow">
-<h2>Convertendo o array de pixels em um objeto Image Pillow<a class="headerlink" href="#convertendo-o-array-de-pixels-em-um-objeto-image-pillow" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="convertendo-um-objeto-do-tipo-imagem-para-um-array-numpy">
-<h2>Convertendo um objeto do tipo imagem para um array numpy<a class="headerlink" href="#convertendo-um-objeto-do-tipo-imagem-para-um-array-numpy" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="salvando-imagens-em-disco">
-<h3>Salvando imagens em disco<a class="headerlink" href="#salvando-imagens-em-disco" title="Permalink to this headline">¶</a></h3>
-</div>
-</div>
-<div class="section" id="convertendo-imagens">
-<h2>Convertendo imagens<a class="headerlink" href="#convertendo-imagens" title="Permalink to this headline">¶</a></h2>
-<p><img alt="" src="https://minerandodados.com.br/wp-content/uploads/2020/01/image-154.png" /></p>
-<p>Na conversão da imagem para escala de cinza temos uma perda de dados, pois deixamos de ter as informações das cores , teremos somente intensidades de preto e branco.</p>
-<p>Mais essa conversão é importante porque alguns métodos e algoritmos exigem que a imagem esteja nesta escala.</p>
-<p>Resize Imagens
-Nesse processo geramos imagens com dimensões menores. Você pode definir valores para deixar a sua imagem ou imagens em um determinado padrão.</p>
-<p><img alt="" src="https://minerandodados.com.br/wp-content/uploads/2020/01/image-155.png" /></p>
-<p>Parece que algo deu errado, apesar de ter especificado no parâmetro thumbnail() que a imagem deveria ter a dimensão de (100,100) ele me retornou uma imagem com a dimensão (100,56).</p>
-<p>Por padrão o thumbnail() mantém o aspect ratio, ou seja, ele mantém a porcentagem de dimensão para que a imagem não seja distorcida.</p>
-<p>Parece que algo deu errado, apesar de ter especificado</p>
-<p>O método resize() é o responsável por ignorar o aspect ratio e gerar uma imagem com as dimensões especificadas no parâmetro. Nesse caso queremos uma imagem de dimensão (200,200).</p>
-</div>
-<div class="section" id="invertendo-imagens-flip">
-<h2>Invertendo Imagens (Flip)<a class="headerlink" href="#invertendo-imagens-flip" title="Permalink to this headline">¶</a></h2>
-<p>É muito utilizado quando estamos trabalhando com machine learning e deep learning para gerar dados diferentes para o nosso conjunto de treinamento afim de diminuir o overfitting e com isso obter melhores resultados.</p>
-</div>
-<div class="section" id="girar-imagens-rotate">
-<h2>Girar Imagens (Rotate)<a class="headerlink" href="#girar-imagens-rotate" title="Permalink to this headline">¶</a></h2>
-<p>Note que carregamos a imagem várias vezes para garantir que as transformações sejam feitas a partir da imagem original.</p>
-</div>
-<div class="section" id="cortar-imagens-crop">
-<h2>Cortar Imagens (Crop)<a class="headerlink" href="#cortar-imagens-crop" title="Permalink to this headline">¶</a></h2>
-<p>Permite cortar as imagens a partir de coordenadas especificas.</p>
-<p>É um processo comum em tarefas de reconhecimento facial, como a nossa área de interesse na imagem é somente a parte em que temos um face , podemos usar esse método para cortar uma determinada coordenada que foi utilizada para detectar uma face no nosso conjunto de imagens.</p>
-</div>
-<div class="section" id="tecnicas-de-pre-processamento-aplicado-a-imagens">
-<h2>Técnicas de pré-processamento aplicado a imagens<a class="headerlink" href="#tecnicas-de-pre-processamento-aplicado-a-imagens" title="Permalink to this headline">¶</a></h2>
-<p>Os algoritmos de machine learning esperam que as imagens estejam em uma determinada escala ou distribuição</p>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="normaliza-a-faixa-de-valores">
-<h1>Normaliza a faixa de valores:<a class="headerlink" href="#normaliza-a-faixa-de-valores" title="Permalink to this headline">¶</a></h1>
-<p>pixels /= pixels.max()</p>
-<iframe width="945" height="532" src="https://www.youtube.com/embed/Zkv_Gmj7Ml4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
-    <script type="text/x-thebe-config">
-    {
-        requestKernel: true,
-        binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
-        },
-        codeMirrorConfig: {
-            theme: "abcdef",
-            mode: "python"
-        },
-        kernelOptions: {
-            kernelName: "python3",
-            path: "./docs"
-        },
-        predefinedOutput: true
-    }
-    </script>
-    <script>kernelName = 'python3'</script>
-
-              </div>
-              
-        
-            <!-- Previous / next buttons -->
+            
+                <!-- Previous / next buttons -->
 <div class='prev-next-area'>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
